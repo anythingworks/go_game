@@ -4,10 +4,12 @@ const UP = Vector2(0, -1)
 var motion = Vector2()
 var most_recent = 'none'
 var animation_state = IDLE
+var jumping = false
 var speed = 250
 
 enum {
 	JUMP
+	FALL
 	RUN
 	IDLE
 }
@@ -39,10 +41,15 @@ func _physics_process(delta):
 	if !(left || right):
 		idle()
 	if is_on_floor():
+		jumping = false
 		if Input.is_action_pressed('ui_up'):
 			motion.y = -300
+			jumping = true
 	else:
-		animation_state = JUMP
+		if jumping:
+			animation_state = JUMP
+		else:
+			animation_state = FALL
 	
 	
 	motion = move_and_slide(motion, UP)
@@ -54,6 +61,9 @@ func _physics_process(delta):
 			$Sprite.play('Running')
 		JUMP:
 			$Sprite.play('Jumping')
+		FALL:
+			$Sprite.play('Falling')
+			
 
 func go_right():
 	motion.x = speed
