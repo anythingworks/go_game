@@ -1,107 +1,23 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/Jump0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Jump3.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Jump4.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=12]
-[ext_resource path="res://TileSet.res" type="TileSet" id=13]
+[ext_resource path="res://Jump upgrade.tscn" type="PackedScene" id=1]
+[ext_resource path="res://DirtAutoTile.tres" type="TileSet" id=2]
+[ext_resource path="res://world complete.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=5]
 
-[sub_resource type="SpriteFrames" id=1]
+[node name="World" type="Node"]
 
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "Jumping",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "Running",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "Falling",
-"speed": 5.0
-} ]
+[node name="Jump upgrade" parent="." index="0" instance=ExtResource( 1 )]
 
-[sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
-extents = Vector2( 14, 10.1711 )
-
-[node name="World" type="Node" index="0"]
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
-
-position = Vector2( 544, 256 )
-scale = Vector2( 0.5, 0.5 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D" index="0"]
-
-position = Vector2( -32, -32 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
-animation = "Idle"
-
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D" index="1"]
-
-position = Vector2( -32, -32 )
-scale = Vector2( 2, 2 )
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" index="2"]
-
-position = Vector2( -32, -23.9742 )
-scale = Vector2( 1.94883, 5.51061 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
+position = Vector2( 512, 224 )
 
 [node name="TileMap" type="TileMap" parent="." index="1"]
 
+position = Vector2( 32, 256 )
 mode = 0
-tile_set = ExtResource( 13 )
-cell_size = Vector2( 32, 32 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 64, 64 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 cell_half_offset = 2
@@ -115,10 +31,22 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 524291, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589887, 1, 0, 720876, 1, 0, 720882, 1, 0, 720888, 1, 0, 720894, 1, 0, 720895, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655371, 0, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 2, 0, 655381, 1, 0, 655382, 1, 0, 655383, 1, 0, 655384, 1, 0, 655385, 1, 0, 655386, 1, 0, 655387, 1, 0, 655388, 1, 0, 655389, 1, 0, 655390, 1, 0, 655391, 1, 0, 655392, 1, 0, 655393, 1, 0, 655394, 1, 0, 655395, 1, 0, 655396, 1, 0, 655397, 1, 0, 655398, 1, 0, 655399, 1, 0, 655400, 1, 0, 655401, 1, 0, 655402, 1, 0, 655403, 1, 0, 655404, 1, 0, 655405, 1, 0, 655406, 1, 0, 655407, 1, 0, 655408, 1, 0, 655409, 1, 0, 655410, 1, 0, 655411, 1, 0, 655412, 1, 0, 655413, 1, 0, 655414, 1, 0, 655415, 1, 0, 655416, 1, 0, 655417, 1, 0, 655418, 1, 0, 655419, 1, 0, 655420, 1, 0, 655421, 1, 0, 655422, 1, 0, 655423, 1, 0, 655424, 1, 0, 655425, 1, 0, 655426, 1, 0, 655427, 1, 0, 655428, 1, 0, 655429, 1, 0, 655430, 1, 0, 655431, 1, 0, 655432, 1, 0, 655433, 1, 0, 655434, 1, 0, 655435, 1, 0, 655436, 1, 0, 655437, 1, 0, 655438, 1, 0, 655439, 1, 0, 655440, 1, 0, 655441, 1, 0, 655442, 1, 0, 655443, 1, 0, 655444, 1, 0, 655445, 1, 0, 655446, 1, 0, 655447, 1, 0, 655448, 1, 0, 655449, 1, 0, 655450, 1, 0, 655451, 1, 0, 655452, 1, 0, 655453, 1, 0, 655454, 1, 0, 655455, 1, 0, 655456, 1, 0, 655457, 1, 0, 655458, 1, 0, 655459, 1, 0, 786412, 1, 0, 786418, 1, 0, 786419, 1, 0, 786422, 1, 0, 786424, 1, 0, 786425, 1, 0, 786428, 1, 0, 786429, 1, 0, 720907, 4, 0, 720908, 3, 0, 720909, 3, 0, 720910, 3, 0, 720911, 3, 0, 720912, 3, 0, 720913, 3, 0, 720914, 3, 0, 720915, 3, 0, 720916, 5, 0, 851949, 1, 0, 851950, 1, 0, 851951, 1, 0, 851952, 1, 0, 851953, 1, 0, 851954, 1, 0, 851955, 1, 0, 851957, 1, 0, 851958, 1, 0, 851959, 1, 0, 851960, 1, 0, 851961, 1, 0, 851962, 1, 0, 851964, 1, 0, 851965, 1, 0, 786443, 8, 0, 786444, 7, 0, 786445, 7, 0, 786446, 7, 0, 786447, 7, 0, 786448, 7, 0, 786449, 7, 0, 786450, 7, 0, 786451, 7, 0, 786452, 6, 0, 786531, 1, 0, 786532, 1, 0, 917483, 1, 0, 917484, 1, 0, 917485, 1, 0, 917486, 1, 0, 917487, 1, 0, 917488, 1, 0, 917489, 1, 0, 917490, 1, 0, 917491, 1, 0, 917492, 1, 0, 917493, 1, 0, 917494, 1, 0, 917495, 1, 0, 917496, 1, 0, 917497, 1, 0, 917498, 1, 0, 917499, 1, 0, 917500, 1, 0, 917501, 1, 0, 852069, 1, 0, 852070, 1, 0, 852071, 1, 0, 852072, 1, 0, 852073, 1, 0, 852074, 1, 0, 852075, 1, 0, 852076, 1, 0, 852077, 1, 0, 852078, 1, 0, 852079, 1, 0, 852080, 1, 0, 852081, 1, 0, 852082, 1, 0, 852083, 1, 0, 852084, 1, 0, 917621, 1, 0, 917622, 1, 0, 917623, 1, 0, 917624, 1, 0, 917625, 1, 0, 917626, 1, 0, 917627, 1, 0, 917628, 1, 0, 917629, 1, 0, 917630, 1, 0, 917631, 1, 0, 917632, 1, 0, 917633, 1, 0, 917634, 1, 0, 917635, 1, 0, 983172, 1, 0, 983173, 1, 0, 983174, 1, 0, 983175, 1, 0, 983176, 1, 0, 983177, 1, 0, 983178, 1, 0, 983179, 1, 0, 983180, 1, 0, 983181, 1, 0, 983182, 1, 0, 983183, 1, 0, 983184, 1, 0 )
-_sections_unfolded = [ "Cell" ]
+tile_data = PoolIntArray( -131090, 0, 196613, -131086, 0, 196613, -131082, 0, 196608, -131081, 0, 196610, -65564, 0, 196613, -65559, 0, 196613, -65544, 0, 196613, -34, 0, 196613, -7, 0, 196613, 65530, 0, 196608, 65531, 0, 131076, 65532, 0, 196609, 65533, 0, 196609, 65534, 0, 196609, 65535, 0, 196609, 0, 0, 196609, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 196609, 7, 0, 196609, 8, 0, 196609, 9, 0, 196609, 10, 0, 196609, 11, 0, 196609, 12, 0, 196609, 13, 0, 196610, 131067, 0, 131077 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="world complete" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 768, 224 )
+
+[node name="player" parent="." index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 668, 192 )
+
+[node name="enemy" parent="." index="4" instance=ExtResource( 5 )]
+
+position = Vector2( 416.569, 231.963 )
+scale = Vector2( 2, 2 )
 
 

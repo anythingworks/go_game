@@ -10,9 +10,13 @@ config_version=3
 
 [application]
 
-config/name="New Game Project"
+config/name="starter"
 run/main_scene="res://WORLD.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+player_data="*res://player_data.tscn"
 
 [display]
 
@@ -24,4 +28,5 @@ window/stretch/shrink="1"
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
